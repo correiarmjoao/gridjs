@@ -23,7 +23,7 @@ interface PipelineProcessorEvents {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface PipelineProcessorProps {}
+export interface PipelineProcessorProps { }
 
 export abstract class PipelineProcessor<
   T,

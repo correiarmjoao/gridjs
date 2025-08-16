@@ -5,6 +5,7 @@ import ServerPaginationLimit from '../../pipeline/limit/serverPagination';
 import { useConfig } from '../../hooks/useConfig';
 import { useEffect, useRef, useState } from 'preact/hooks';
 import { useTranslator } from '../../i18n/language';
+import { useStore } from 'src/hooks/useStore';
 
 export interface PaginationConfig {
   limit?: number;
@@ -37,6 +38,7 @@ export function Pagination() {
   const [currentPage, setCurrentPage] = useState(page);
   const [total, setTotal] = useState(0);
   const _ = useTranslator();
+  const store = useStore();
 
   useEffect(() => {
     if (server) {
@@ -86,7 +88,15 @@ export function Pagination() {
   const onUpdate = (updatedProcessor) => {
     // this is to ensure that the current page is set to 0
     // when a processor is updated for some reason
-    if (resetPageOnUpdate && updatedProcessor !== processor.current) {
+
+    const storeState = store.getState();
+    const isInitialLoad = storeState?.isInitialLoad;
+
+    if (
+      resetPageOnUpdate &&
+      updatedProcessor !== processor.current &&
+      !isInitialLoad
+    ) {
       setCurrentPage(0);
 
       if (processor.current.props.page !== 0) {

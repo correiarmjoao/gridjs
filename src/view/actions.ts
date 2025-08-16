@@ -51,3 +51,10 @@ export const SetTableRef = (tableRef) => (state) => {
     tableRef: tableRef,
   };
 };
+
+export const SetInitialLoadToFalse = () => (state) => {
+  return {
+    ...state,
+    isInitialLoad: false
+  }
+}

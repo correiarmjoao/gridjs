@@ -125,6 +125,7 @@ export class Config {
         status: Status.Init,
         header: undefined,
         data: null,
+        isInitialLoad: true,
       }),
       plugin: new PluginManager(),
       tableRef: createRef(),

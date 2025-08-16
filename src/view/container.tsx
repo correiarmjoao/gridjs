@@ -35,6 +35,8 @@ export function Container() {
       log.error(e);
       dispatch(actions.SetDataErrored());
     }
+
+    dispatch(actions.SetInitialLoadToFalse());
   }, config.processingThrottleMs);
 
   useEffect(() => {
